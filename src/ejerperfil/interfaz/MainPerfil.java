@@ -5,45 +5,74 @@ import java.util.Scanner;
 
 public class MainPerfil {
     public static void main(String[] args) {
+        String nombre = null, apellido = null, sexo = null;
+        int dia = 0, mes = 0, anio = 0, opc = 0;
+        double altura = 0, peso = 0;
+        PerfilMedico paciente = null;
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("--- Registro de Perfil Medico ---");
+        // leer las variables auxiliares
+        System.out.print("Ingrese el primer nombre: ");
+        nombre = sc.nextLine();
+        System.out.print("Ingrese el apellido: ");
+        apellido = sc.nextLine();
+        System.out.print("Ingrese el sexo (M/F): ");
+        sexo = sc.nextLine();
+        System.out.print("Ingrese el dia de nacimiento: ");
+        dia = Integer.parseInt(sc.nextLine());
+        System.out.print("Ingrese el mes de nacimiento: ");
+        mes = Integer.parseInt(sc.nextLine());
+        System.out.print("Ingrese el anio de nacimiento: ");
+        anio = Integer.parseInt(sc.nextLine());
+        System.out.print("Ingrese la altura en centimetros: ");
+        altura = Double.parseDouble(sc.nextLine());
+        System.out.print("Ingrese el peso en kilogramos: ");
+        peso = Double.parseDouble(sc.nextLine());
 
-        System.out.println("Ingrese el primer nombre: ");
-        String nombre = sc.nextLine();
+        paciente = new PerfilMedico(nombre, apellido, sexo, dia, mes, anio, altura, peso);
 
-        System.out.println("Ingrese el apellido: ");
-        String apellido = sc.nextLine();
+        do {
+            System.out.println("1.Actualizar Peso");
+            System.out.println("2.Actualizar Altura");
+            System.out.println("3.Mostrar Reporte Completo y BMI");
+            System.out.println("4.Salir");
+            System.out.print("Ingrese una opcion: ");
+            opc = Integer.parseInt(sc.nextLine());
 
-        System.out.println("Ingrese el sexo (M/F): ");
-        String sexo = sc.nextLine();
-
-        System.out.println("Ingrese el dia de nacimiento: ");
-        int dia = Integer.parseInt(sc.nextLine());
-
-        System.out.println("Ingrese el mes de nacimiento: ");
-        int mes = Integer.parseInt(sc.nextLine());
-
-        System.out.println("Ingrese el anio de nacimiento: ");
-        int anio = Integer.parseInt(sc.nextLine());
-
-        System.out.println("Ingrese la altura en centimetros: ");
-        double altura = Double.parseDouble(sc.nextLine());
-
-        System.out.println("Ingrese el peso en kilogramos: ");
-        double peso = Double.parseDouble(sc.nextLine());
-
-        PerfilMedico paciente = new PerfilMedico(nombre, apellido, sexo, dia, mes, anio, altura, peso);
-
-        System.out.println("\n------------ REPORTE MEDICO ------------");
-        System.out.println(paciente);
-        System.out.println("------------------------------------------");
-
-        System.out.println("\n------------- VALORES DE BMI -------------");
-        System.out.println("Bajo peso:  menos de 18.5");
-        System.out.println("Normal:     entre 18.5 y 24.9");
-        System.out.println("Sobrepeso:  entre 25 y 29.9");
-        System.out.println("Obeso:      30 o mas");
-        System.out.println("------------------------------------------");
+            switch (opc) {
+                case 1: {
+                    double nPeso;
+                    System.out.print("Ingrese el nuevo peso (kg): ");
+                    nPeso = Double.parseDouble(sc.nextLine());
+                    paciente.establecerPeso(nPeso);
+                    System.out.println("Peso actualizado.");
+                    System.out.println("\n------------------------------------------\n");
+                } break;
+                case 2: {
+                    double nAltura;
+                    System.out.print("Ingrese la nueva altura (cm): ");
+                    nAltura = Double.parseDouble(sc.nextLine());
+                    paciente.establecerAltura(nAltura);
+                    System.out.println("Altura actualizada.");
+                    System.out.println("\n------------------------------------------\n");
+                } break;
+                case 3: {
+                    System.out.println("-------------REPORTE MEDICO-------------\n" + paciente);
+                    System.out.println("------------------------------------------");
+                    System.out.println("             VALORES DE BMI               ");
+                    System.out.println("Bajo peso:  menos de 18.5");
+                    System.out.println("Normal:     entre 18.5 y 24.9");
+                    System.out.println("Sobrepeso:  entre 25 y 29.9");
+                    System.out.println("Obeso:      30 o mas");
+                    System.out.println("------------------------------------------\n");
+                } break;
+                case 4: {
+                    System.out.println("Gracias por usar nuestros servicios");
+                } break;
+                default: {
+                    System.out.println("Opcion no valida...");
+                } break;
+            }
+        } while (opc != 4);
     }
 }

@@ -5,29 +5,43 @@ import java.util.Scanner;
 
 public class MainFrecuencia {
     public static void main(String[] args) {
+        String nombre = null, apellido = null;
+        int mes = 0, dia = 0, anio = 0, opc = 0;
+        FrecuenciasCardiacas persona = null;
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("--- Calculadora de Frecuencia Cardiaca ---");
+        // leer las variables auxiliares
+        System.out.print("Ingrese el primer nombre: ");
+        nombre = sc.nextLine();
+        System.out.print("Ingrese el apellido: ");
+        apellido = sc.nextLine();
+        System.out.print("Ingrese el mes de nacimiento: ");
+        mes = Integer.parseInt(sc.nextLine());
+        System.out.print("Ingrese el dia de nacimiento: ");
+        dia = Integer.parseInt(sc.nextLine());
+        System.out.print("Ingrese el anio de nacimiento: ");
+        anio = Integer.parseInt(sc.nextLine());
 
-        System.out.println("Ingrese el primer nombre: ");
-        String nombre = sc.nextLine();
+        persona = new FrecuenciasCardiacas(nombre, apellido, mes, dia, anio);
 
-        System.out.println("Ingrese el apellido: ");
-        String apellido = sc.nextLine();
+        do {
+            System.out.println("1.Mostrar Resultados (Edad y Frecuencia)");
+            System.out.println("2.Salir");
+            System.out.print("Ingrese una opcion: ");
+            opc = Integer.parseInt(sc.nextLine());
 
-        System.out.println("Ingrese el mes de nacimiento: ");
-        int mes = Integer.parseInt(sc.nextLine());
-
-        System.out.println("Ingrese el dia de nacimiento: ");
-        int dia = Integer.parseInt(sc.nextLine());
-
-        System.out.println("Ingrese el anio de nacimiento: ");
-        int anio = Integer.parseInt(sc.nextLine());
-
-        FrecuenciasCardiacas persona = new FrecuenciasCardiacas(nombre, apellido, mes, dia, anio);
-
-        System.out.println("\n------------ RESULTADOS ------------");
-        System.out.println(persona);
-        System.out.println("------------------------------------");
+            switch (opc) {
+                case 1: {
+                    System.out.println("----------REPORTE DE FRECUENCIA----------\n" + persona);
+                    System.out.println("------------------------------------------\n");
+                } break;
+                case 2: {
+                    System.out.println("Gracias por usar nuestros servicios");
+                } break;
+                default: {
+                    System.out.println("Opcion no valida...");
+                } break;
+            }
+        } while (opc != 2);
     }
 }
