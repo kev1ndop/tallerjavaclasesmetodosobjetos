@@ -1,5 +1,7 @@
 package ejerfrecuencia.negocio;
 
+import java.time.LocalDate;
+
 public class FrecuenciasCardiacas {
     private String primerNombre;
     private String apellido;
@@ -59,7 +61,7 @@ public class FrecuenciasCardiacas {
 
     // Metodo que calcula y devuelve la edad en anios
     public int calcularEdad() {
-        return 2026 - anioNacimiento;
+        return LocalDate.now().getYear() - anioNacimiento;
     }
 
     // Metodo que calcula y devuelve la frecuencia cardiaca maxima

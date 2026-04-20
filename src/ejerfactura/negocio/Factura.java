@@ -1,5 +1,7 @@
 package ejerfactura.negocio;
 
+import java.util.Locale;
+
 public class Factura {
     private String numeroPieza;
     private String descripcionPieza;
@@ -75,7 +77,7 @@ public class Factura {
         return "No. Pieza: " + numeroPieza +
                "\nDescripcion: " + descripcionPieza +
                "\nCantidad: " + cantidad +
-               "\nPrecio por articulo: $" + precioPorArticulo +
-               "\nTotal Factura: $" + obtenerMontoFactura();
+               "\nPrecio por articulo: $" + String.format(Locale.US, "%.2f", precioPorArticulo) +
+               "\nTotal Factura: $" + String.format(Locale.US, "%.2f", obtenerMontoFactura());
     }
 }

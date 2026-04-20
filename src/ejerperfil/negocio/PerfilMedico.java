@@ -1,5 +1,7 @@
 package ejerperfil.negocio;
 
+import java.time.LocalDate;
+
 public class PerfilMedico {
     private String primerNombre;
     private String apellido;
@@ -91,7 +93,7 @@ public class PerfilMedico {
 
     // Metodo que calcula y devuelve la edad en anios
     public int calcularEdad() {
-        return 2026 - anioNacimiento;
+        return LocalDate.now().getYear() - anioNacimiento;
     }
 
     // Metodo que calcula y devuelve la frecuencia cardiaca maxima
@@ -112,6 +114,21 @@ public class PerfilMedico {
         return peso / (alturaMetros * alturaMetros);
     }
 
+    public String obtenerClasificacionBMI() {
+        double bmi = calcularBMI();
+
+        if (bmi < 18.5) {
+            return "Bajo peso";
+        }
+        if (bmi < 25.0) {
+            return "Normal";
+        }
+        if (bmi < 30.0) {
+            return "Sobrepeso";
+        }
+        return "Obeso";
+    }
+
     @Override
     public String toString() {
         return "Nombre: " + primerNombre + " " + apellido +
@@ -121,6 +138,7 @@ public class PerfilMedico {
                "\nPeso: " + peso + " kg" +
                "\nEdad: " + calcularEdad() + " anios" +
                "\nIMC (BMI): " + String.format("%.2f", calcularBMI()) +
+               "\nClasificacion BMI: " + obtenerClasificacionBMI() +
                "\nFrecuencia cardiaca maxima: " + calcularFrecuenciaMaxima() + " bpm" +
                "\nRango de frecuencia esperada: " + calcularFrecuenciaEsperada();
     }

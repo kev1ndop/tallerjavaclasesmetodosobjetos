@@ -1,7 +1,7 @@
 package ejerfactura.interfaz;
 
 import ejerfactura.negocio.Factura;
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class MainFactura {
     public static void main(String[] args) {
@@ -9,54 +9,44 @@ public class MainFactura {
         int cant = 0, opc = 0;
         double precio = 0;
         Factura f1 = null;
-        Scanner sc = new Scanner(System.in);
 
-        // leer las variables auxiliares
-        System.out.println("Ingrese el numero de pieza: ");
-        num = sc.nextLine();
-        System.out.println("Ingrese la descripcion de la pieza: ");
-        desc = sc.nextLine();
-        System.out.println("Ingrese la cantidad de articulos: ");
-        cant = Integer.parseInt(sc.nextLine());
-        System.out.println("Ingrese el precio por articulo: ");
-        precio = Double.parseDouble(sc.nextLine());
+        // leer las variables auxiliares con ventanas emergentes
+        num   = JOptionPane.showInputDialog(null, "Ingrese el numero de pieza:");
+        desc  = JOptionPane.showInputDialog(null, "Ingrese la descripcion de la pieza:");
+        cant  = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la cantidad de articulos:"));
+        precio = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el precio por articulo:"));
 
         f1 = new Factura(num, desc, cant, precio);
 
         do {
-            System.out.println("1.Modificar Cantidad");
-            System.out.println("2.Modificar Precio");
-            System.out.println("3.Mostrar Datos");
-            System.out.println("4.Salir");
-            System.out.print("Ingrese una opcion: ");
-            opc = Integer.parseInt(sc.nextLine());
+            String menu = "1. Modificar Cantidad\n2. Modificar Precio\n3. Mostrar Datos\n4. Salir";
+            String opcStr = JOptionPane.showInputDialog(null, menu, "Menu Factura", JOptionPane.PLAIN_MESSAGE);
+
+            if (opcStr == null) break;
+            opc = Integer.parseInt(opcStr);
 
             switch (opc) {
                 case 1: {
                     int nuevaCant;
-                    System.out.print("Ingrese la nueva cantidad: ");
-                    nuevaCant = Integer.parseInt(sc.nextLine());
+                    nuevaCant = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la nueva cantidad:"));
                     f1.establecerCantidad(nuevaCant);
-                    System.out.println("Cantidad actualizada.");
-                    System.out.println("\n------------------------------------------\n");
+                    JOptionPane.showMessageDialog(null, "Cantidad actualizada correctamente.");
                 } break;
                 case 2: {
                     double nuevoPrecio;
-                    System.out.print("Ingrese el nuevo precio: ");
-                    nuevoPrecio = Double.parseDouble(sc.nextLine());
+                    nuevoPrecio = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el nuevo precio:"));
                     f1.establecerPrecioPorArticulo(nuevoPrecio);
-                    System.out.println("Precio actualizado.");
-                    System.out.println("\n------------------------------------------\n");
+                    JOptionPane.showMessageDialog(null, "Precio actualizado correctamente.");
                 } break;
                 case 3: {
-                    System.out.println("------------DATOS DE FACTURA------------\n" + f1);
-                    System.out.println("------------------------------------------\n");
+                    JOptionPane.showMessageDialog(null, "--- DATOS DE FACTURA ---\n" + f1,
+                            "Datos de Factura", JOptionPane.INFORMATION_MESSAGE);
                 } break;
                 case 4: {
-                    System.out.println("Gracias por usar nuestros servicios");
+                    JOptionPane.showMessageDialog(null, "Gracias por usar nuestros servicios.");
                 } break;
                 default: {
-                    System.out.println("Opcion no valida...");
+                    JOptionPane.showMessageDialog(null, "Opcion no valida.", "Error", JOptionPane.ERROR_MESSAGE);
                 } break;
             }
         } while (opc != 4);
